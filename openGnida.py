@@ -1,5 +1,5 @@
 def main():
-    pass
+    volume_filler(32*1024*1024)
 
 def volume_filler(file_size: int) -> Exception:
     number = 1

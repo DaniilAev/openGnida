@@ -1,9 +1,14 @@
 def main():
-    volume_filler(32*1024*1024)
+    volume=32
+    while True:
+        volume_filler(volume)
+        if volume == 1:
+            break
+        volume //= 2
 
-def volume_filler(file_size: int) -> Exception:
+def volume_filler(file_size: int) -> bool:
     number = 1
-    current_exception = None
+    is_exception_raised = False
     for attempt in range(5):
         try:
             while True:
@@ -11,10 +16,9 @@ def volume_filler(file_size: int) -> Exception:
                     file.write(b'\xFF'*file_size)
                     file.close()
                 number += 1
-        except Exception as exp:
-            current_exception = exp
-    return current_exception
-
+        except OSError:
+            is_exception_raised = True
+    return is_exception_raised
 
 
 confirm = False

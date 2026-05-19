@@ -1,6 +1,10 @@
 import os
 import shutil
+import random
+import string
 
+def rand_name():
+    return ''.join(random.choices(string.ascii_letters, k=64))
 
 def main():
     volume=32*1024*1024
@@ -46,7 +50,7 @@ def volume_filler(file_size: int):
     for attempt in range(5):
         try:
             while True:
-                with open(f"payload/dumb_file{file_size}_{number}.bin", "wb") as file:
+                with open(f"payload/{rand_name()}.bin", "wb") as file:
                     file.write(b'\xFF'*file_size)
                     file.close()
                 number += 1
